@@ -38,8 +38,8 @@ $apiUtilities = new ApiUtilities();
               <h4><?= $place->getNom(); ?></h4>
               <p><?= $place->getFormatedAddress(); ?></p>
               <div class="portfolio-links">
-                <a onclick="document.getElementById('formPlace<?= $place->getIdPlace(); ?>').submit()"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a onclick="document.getElementById('formPlace<?= $place->getIdPlace(); ?>').submit()" title="Plus d'informations"><i class="bx bx-plus"></i></a>
+                <a href="<?= $place->getUrlMap(); ?>" title="Voir sur Google Map"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
