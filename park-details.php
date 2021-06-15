@@ -148,6 +148,10 @@
 
   </main><!-- End #main -->
 
+  <?php 
+  //Affichage des activités
+    include "activite_affichage.php" ?>
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="footer-top">
