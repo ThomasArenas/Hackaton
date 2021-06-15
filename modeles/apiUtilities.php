@@ -9,7 +9,7 @@ require_once 'modeles/place.php';
         private $apiKey = 'AIzaSyAQPcwOFq77H4AO32_gN3olrErOVTmLgx8';
     
         //Retourne la liste des espaces verts récupérés avec l'API 
-        public function getPlaces($location = '45.773754217023,4.8520206932541', $type = 'park' , $maxHeight = '540', $maxWidth = '' ) {
+        public function getPlaces($location = '45.773754217023,4.8520206932541', $type = 'park' , $maxHeight = '500', $maxWidth = '' ) {
             $url = $this->baseURL.'place/nearbysearch/json?location='.$location.'&radius=500&type='.$type.'&key='.$this->apiKey;
             $response = file_get_contents($url);
             $response = json_decode($response);
@@ -24,10 +24,11 @@ require_once 'modeles/place.php';
                 //on crée l'url qui servira à afficher la photo de l'espace en cours
                 $urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$referencePhotoEspacesVerts.'&key='.$this->apiKey;
                 //on crée l'url qui servira à afficher l'addresse formatée de l'espace en cours
-                $urlAddresse = $this->baseURL.'place/details/json?place_id='.$idEspacesVerts.'&fields=formatted_address&key='.$this->apiKey;
+                $urlAddresse = $this->baseURL.'place/details/json?place_id='.$idEspacesVerts.'&fields=formatted_address,url&key='.$this->apiKey;
                 $addresse = $this->getPlacesAddresse($urlAddresse);
+                $urlMap = $this->getUrlMap($urlAddresse);
                 //on stock les noms et référence_photo des espaces verts dans notre objet de type place
-                $place = new Place($nomEspacesVerts, $location, $urlPhoto,$addresse, $idEspacesVerts);
+                $place = new Place($nomEspacesVerts, $location, $urlPhoto,$addresse, $idEspacesVerts, $urlMap);
                 //on insère l'instance dans le tableau
                 array_push($tabEspacesVerts, $place);
             }
@@ -39,10 +40,19 @@ require_once 'modeles/place.php';
         //Recupère l'addresse d'une place
         public function getPlacesAddresse($url){
 
-        $response = file_get_contents($url);
-        $response = json_decode($response);
-        $addresse = $response->result->formatted_address;
-        return $addresse;
-       } 
+            $response = file_get_contents($url);
+            $response = json_decode($response);
+            $addresse = $response->result->formatted_address;
+            return $addresse;
+        } 
+
+       //Recupère l'url Google Map d'une place
+        public function getUrlMap($url){
+
+            $response = file_get_contents($url);
+            $response = json_decode($response);
+            $adresseUrl = $response->result->url;
+            return $adresseUrl;
+        } 
 }
 ?>
