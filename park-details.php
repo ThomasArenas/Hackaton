@@ -1,3 +1,10 @@
+<?php 
+require_once 'modeles/apiUtilities.php';
+$idPlace = $_POST['IdPlace'];
+//instance de la classe EspacesVerts pour utiliser la fonction de récupération des espaces
+$apiUtilities = new ApiUtilities();
+$place = $apiUtilities->getPlace($idPlace);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,11 +88,8 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Portfolio Details</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Portfolio Details</li>
-          </ol>
+          <h2><?= $place->getNom(); ?></h2>
+         
         </div>
 
       </div>
@@ -102,15 +106,15 @@
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" alt="">
+                  <img src="<?= $place->getPicture1(); ?>" alt="">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
+                  <img src="<?= $place->getPicture2(); ?>" alt="">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
+                  <img src="<?= $place->getPicture3(); ?>" alt="">
                 </div>
 
               </div>
@@ -120,19 +124,17 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Project information</h3>
+              <h3><?= $place->getNom(); ?></h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
+                <li><strong>Adresse</strong>: <?= $place->getFormatted_address(); ?> </li>
                 <li><strong>Client</strong>: ASU Company</li>
                 <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Afficher sur la carte</strong>: <a href="<?= $place->getUrl(); ?>" target='_blank'>GoogleMap</a></li>
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
+              <h2> " <?= $place->getReview()->getText(); ?> "</h2> 
+              <p><span style="font-weight : bold; font-style : italic; color : #64605F;"> <?= $place->getReview()->getAuthor_name(); ?></span> (<?= $place->getReview()->getRelative_time_description(); ?>)</p>
             </div>
           </div>
 
