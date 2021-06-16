@@ -6,19 +6,17 @@
         public $urlImage;
         private $formatedAddress;
         private $idPlace;
+        private $urlMap;
         
-        function __construct($nom, $location, $urlImage, $formatedAddress, $idPlace) {
+        function __construct($nom, $location, $urlImage, $formatedAddress, $idPlace, $urlMap) {
             $this->nom = $nom;
             $this->location = $location;
             $this->urlImage = $urlImage;
             $this->formatedAddress = $formatedAddress;
             $this->idPlace = $idPlace;
+            $this->urlMap = $urlMap;
         }
     
-       
-
-
-
         /**
          * Get the value of urlImage
          */ 
@@ -115,6 +113,26 @@
         public function setIdPlace($idPlace)
         {
                 $this->idPlace = $idPlace;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of urlMap
+         */ 
+        public function getUrlMap()
+        {
+                return $this->urlMap;
+        }
+
+        /**
+         * Set the value of urlMap
+         *
+         * @return  self
+         */ 
+        public function setUrlMap($urlMap)
+        {
+                $this->urlMap = $urlMap;
 
                 return $this;
         }
