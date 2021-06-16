@@ -65,7 +65,7 @@ require_once 'modeles/place.php';
                             $typeFr = 'd\'établissements de bien-être ouvert';
                             break;
                     }
-                    $place = new Place('Désolé', '', 'assets/img/close.png', 'Il n\'y a pas '.$typeFr.' à proximité', '', '');
+                    $place = new Place('Désolé', '', 'assets/img/close.png', 'Il n\'y a pas '.$typeFr.' à proximité', '', 'false');
                 } else {
                     //on récupère le noms, reference_photo et id de l'espace en cours 
                     $nomEspacesVerts = $response->results[0]->name;
@@ -102,7 +102,7 @@ require_once 'modeles/place.php';
                     $urlMap = $this->getUrlMap($urlAddresse);
                     $addressLocation = $this->getLocation($urlAddresse);
                     //on stock les noms et référence_photo des activités dans notre objet de type place
-                    $place = new Place($nomEspacesVerts, $addressLocation, $urlPhoto,$addresse, $idEspacesVerts, $urlMap);
+                    $place = new Place($nomEspacesVerts, $addressLocation, $urlPhoto, $addresse, $idEspacesVerts, $urlMap);
                 }
                 //on insère l'instance dans le tableau
                 array_push($tabActivites, $place);
@@ -127,15 +127,6 @@ require_once 'modeles/place.php';
             $response = json_decode($response);
             $location = $response->result->geometry->location->lat.','.$response->result->geometry->location->lng;
             return $location;
-        } 
-
-        //Recupère l'url Google Map d'une place
-        public function getPhone($url){
-
-            $response = file_get_contents($url);
-            $response = json_decode($response);
-            $phone = $response->result->formatted_phone_number;
-            return $phone;
         } 
 
        //Recupère l'url Google Map d'une place
