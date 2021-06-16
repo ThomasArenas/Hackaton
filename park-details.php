@@ -1,47 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+require_once 'modeles/apiUtilities.php';
+$idPlace = $_POST['IdPlace'];
+//instance de la classe EspacesVerts pour utiliser la fonction de récupération des espaces
+$apiUtilities = new ApiUtilities();
+$place = $apiUtilities->getPlace($idPlace);
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Portfolio Details - Groovin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-
-</head>
-
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <h1 class="logo"><a href="index.php">Greentivity</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-    </div>
-  </header><!-- End Header -->
+//inclusion du header 
+include "header.php"; 
+?>
 
   <main id="main">
 
@@ -50,11 +16,8 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Portfolio Details</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Portfolio Details</li>
-          </ol>
+          <h2><?= $place->getNom(); ?></h2>
+         
         </div>
 
       </div>
@@ -71,15 +34,15 @@
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" alt="">
+                  <img src="<?= $place->getPicture1(); ?>" alt="">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
+                  <img src="<?= $place->getPicture2(); ?>" alt="">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
+                  <img src="<?= $place->getPicture3(); ?>" alt="">
                 </div>
 
               </div>
@@ -89,19 +52,20 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Project information</h3>
+              <h3><?= $place->getNom(); ?></h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Adresse</strong>: <?= $place->getFormatted_address(); ?> </li>
+                <li><strong>Horraires</strong>:</li>
+                <?php foreach ($place->getTimetable() as $day) { ?>
+                  <li><?= $day; ?></li>
+               <?php } ?>
+                
+                <li><strong>Afficher sur la carte</strong>: <a href="<?= $place->getUrl(); ?>" target='_blank'>GoogleMap</a></li>
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
+              <h2> " <?= $place->getReview()->getText(); ?> "</h2> 
+              <p><span style="font-weight : bold; font-style : italic; color : #64605F;"> <?= $place->getReview()->getAuthor_name(); ?></span> (<?= $place->getReview()->getRelative_time_description(); ?>)</p>
             </div>
           </div>
 
