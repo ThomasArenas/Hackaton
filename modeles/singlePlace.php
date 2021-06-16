@@ -4,18 +4,18 @@
         private $nom;
         private $url;
         private $formatted_address;
-        //private $timetable;
+        private $timetable;
         private $picture1;
         private $picture2;
         private $picture3;
         private $review;
 
         
-        function __construct($nom, $url, $formatted_address, $picture1, $picture2, $picture3,$review) {
+        function __construct($nom, $url, $formatted_address,$timetable ,$picture1, $picture2, $picture3,$review) {
             $this->nom = $nom;
             $this->url = $url;
             $this->formatted_address = $formatted_address;
-            //$this->timetable = $timetable;
+            $this->timetable = $timetable;
             $this->picture1 = $picture1;
             $this->picture2 = $picture2;
             $this->picture3 = $picture3;
@@ -184,5 +184,7 @@
 
                 return $this;
         }
+
+     
 }
 ?>

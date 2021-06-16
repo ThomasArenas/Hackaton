@@ -66,11 +66,17 @@ require_once 'modeles/review.php';
             $nomEspaceVert = $response->result->name;
             $urlMap = $response->result->url;
             $addresse = $response->result->formatted_address;
-            //timetable = $response->result->
+            
             $refPicture1 =$response->result->photos[0]->photo_reference;
             $refPicture2 =$response->result->photos[1]->photo_reference;
             $refPicture3 =$response->result->photos[2]->photo_reference;
-    
+
+            //on récupère les horraires de l'espace vert dans un tableau
+            $timetable = array();
+            for ($i=0; $i < 7; $i++) { 
+                array_push($timetable, $response->result->opening_hours->weekday_text[$i]);
+            }
+            
             //on récupère le premier avis sur l'espace vert
             $text = $response->result->reviews[0]->text;
             $rating = $response->result->reviews[0]->rating;
@@ -81,7 +87,7 @@ require_once 'modeles/review.php';
             $review = new Review($author_name, $rating, $relative_time_description, $text);
 
              //on stock les infos de l'espace vert dans notre objet de type SinglePlace
-             $singlePlace = new SinglePlace($nomEspaceVert, $urlMap,$addresse, $this->generatePicture($refPicture1), $this->generatePicture($refPicture2), $this->generatePicture($refPicture3), $review);
+             $singlePlace = new SinglePlace($nomEspaceVert, $urlMap,$addresse, $timetable ,$this->generatePicture($refPicture1), $this->generatePicture($refPicture2), $this->generatePicture($refPicture3), $review);
 
             return $singlePlace;
             
