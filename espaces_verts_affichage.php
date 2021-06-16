@@ -27,7 +27,7 @@ $apiUtilities = new ApiUtilities();
       <div class="row portfolio-container">
         <?php //Pour chaque espace vert présent, on génère son affichage
         foreach($apiUtilities->getPlaces() as $place){  ?>
-          <form action="park-details.php" method="post" id="formPlace<?= $place->getIdPlace(); ?>">
+          <form action="park-details.php" method="get" id="formPlace<?= $place->getIdPlace(); ?>">
             <input type='hidden' name="Location" value='<?= $place->getLocation(); ?>'>
           </form>
 

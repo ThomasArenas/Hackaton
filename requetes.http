@@ -1,1 +1,3 @@
 GET https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.773754217023,4.8520206932541&radius=1000&type=park&key=AIzaSyAQPcwOFq77H4AO32_gN3olrErOVTmLgx8
+
+GET https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.773754217023,4.8520206932541&radius=500&type=bar&key=AIzaSyAQPcwOFq77H4AO32_gN3olrErOVTmLgx8
