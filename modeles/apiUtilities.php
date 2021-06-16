@@ -26,7 +26,7 @@ require_once 'modeles/review.php';
                 //on crée l'url qui servira à afficher la photo de l'espace en cours
                 //$urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$referencePhotoEspacesVerts.'&key='.$this->apiKey;
                 //on crée l'url qui servira à afficher l'addresse formatée de l'espace en cours
-                $urlAddresse = $this->baseURL.'place/details/json?place_id='.$idEspacesVerts.'&fields=formatted_address,url&key='.$this->apiKey;
+                $urlAddresse = $this->baseURL.'place/details/json?place_id='.$idEspacesVerts.'$fields=formatted_address,url&key='.$this->apiKey;
                 $addresse = $this->getPlacesAddresse($urlAddresse);
                 $urlMap = $this->getUrlMap($urlAddresse);
                 //on stock les noms et référence_photo des espaces verts dans notre objet de type place
@@ -59,7 +59,7 @@ require_once 'modeles/review.php';
 
         //Récupère un espace vert grace à son ID
         public function getPlace($placeId){
-            $url = $this->baseURL.'place/details/json?place_id='.$placeId.'&key='.$this->apiKey;
+            $url = $this->baseURL.'place/details/json?place_id='.$placeId.'&language=fr&key='.$this->apiKey;
             $response = file_get_contents($url);
             $response = json_decode($response);
             //on récupère les infos de l'espace vert
