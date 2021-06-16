@@ -3,6 +3,7 @@ require_once 'modeles/place.php';
 require_once 'modeles/singlePlace.php';
 require_once 'modeles/review.php';
 
+
     class ApiUtilities {
         //nbr de resultats affichés
         private $resultCount = 7;

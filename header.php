@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - Groovin Bootstrap Template</title>
+  <title>Greentivity</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,7 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <script src="geolocalisation.js"></script>
 
 </head>
 
