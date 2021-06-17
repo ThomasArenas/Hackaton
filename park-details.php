@@ -34,15 +34,15 @@ include "header.php";
               <div class="swiper-wrapper align-items-center">
 
                 <div class="swiper-slide">
-                  <img src="<?= $place->getPicture1(); ?>" alt="">
+                  <img src="<?= $place->getPicture1(); ?>" style="width:auto; height:500px">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="<?= $place->getPicture2(); ?>" alt="">
+                  <img src="<?= $place->getPicture2(); ?>" style="width:auto; height:500px">
                 </div>
 
                 <div class="swiper-slide">
-                  <img src="<?= $place->getPicture3(); ?>" alt="">
+                  <img src="<?= $place->getPicture3(); ?>" style="width:auto; height:500px">
                 </div>
 
               </div>
@@ -91,7 +91,7 @@ include "header.php";
               </ul>
             </div>
             <div class="portfolio-description">
-              <h5> " <?= $place->getReview()->getText(); ?> "</h5> 
+              <p sytle="font-size: 14px"> " <?= $place->getReview()->getText(); ?> "</p> 
               <p><span style="font-weight : bold; font-style : italic; color : #64605F;"> <?= $place->getReview()->getAuthor_name(); ?></span> (<?= $place->getReview()->getRelative_time_description(); ?>)</p>
             </div>
           </div>
@@ -105,7 +105,7 @@ include "header.php";
 
   <?php 
   //Affichage des activités
-    include "activite_affichage.php" ?>
+    include "activite_affichage.php"; ?>
 
 <?php 
     //Affichage des espaces verts

@@ -2,6 +2,7 @@
 require_once 'modeles/place.php';
 require_once 'modeles/singlePlace.php';
 require_once 'modeles/review.php';
+require_once 'modeles/activities.php';
 
     class ApiUtilities {
         //nbr de resultats affichés
@@ -41,7 +42,7 @@ require_once 'modeles/review.php';
         }   
 
         //Retourne la liste des espaces verts récupérés avec l'API 
-        public function getActivities($maxHeight = '500', $maxWidth = '500') {
+        public function getActivities($maxHeight = '200', $maxWidth = '400') {
             $tabType=array('bar', 'restaurant', 'movie_theater', 'tourist_attraction', 'spa');
             $tabActivites=array();
             foreach($tabType as $type) {
@@ -67,7 +68,8 @@ require_once 'modeles/review.php';
                             $typeFr = 'd\'établissements de bien-être ouvert';
                             break;
                     }
-                    $place = new Place('Désolé', '', 'assets/img/close.png', 'Il n\'y a pas '.$typeFr.' à proximité', '', 'false');
+                    //$place = new Place('Désolé', '', 'assets/img/close.png', 'Il n\'y a pas '.$typeFr.' à proximité', '', 'false');
+                    $activities = new Activities('Désolé', '', 'assets/img/close.png', 'Il n\'y a pas '.$typeFr.' à proximité', '', 'false');
                 } else {
                     //on récupère le noms, reference_photo et id de l'espace en cours 
                     $nomEspacesVerts = $response->results[0]->name;
@@ -103,11 +105,34 @@ require_once 'modeles/review.php';
                     $addresse = $this->getPlacesAddresse($urlAddresse);
                     $urlMap = $this->getUrlMap($urlAddresse);
                     $addressLocation = $this->getLocation($urlAddresse);
-                    //on stock les noms et référence_photo des activités dans notre objet de type place
-                    $place = new Place($nomEspacesVerts, $addressLocation, $urlPhoto, $addresse, $idEspacesVerts, $urlMap);
+
+                    //on récupère le premier avis de l'activité
+                    $urlActiviteReview = $this->baseURL.'place/details/json?place_id='.$idEspacesVerts.'&language=fr&key='.$this->apiKey;
+                    $responseReview = file_get_contents($urlActiviteReview);
+                    $responseReview = json_decode($responseReview);
+
+                    //si l'activité n'a pas de review
+                    if(isset($responseReview->result->reviews)== false || is_null($responseReview->result->reviews)){
+                        $text = "Commentaire non disponible";
+                        $rating = "Note non disponible";
+                        $author_name = "Information non disponible";
+                        $relative_time_description = "Information non disponible";
+                    }
+                    else{
+                        $text = $responseReview->result->reviews[0]->text;
+                        $rating = $responseReview->result->reviews[0]->rating;
+                        $author_name = $responseReview->result->reviews[0]->author_name;
+                        $relative_time_description = $responseReview->result->reviews[0]->relative_time_description;
+                    }
+                    //on stock un avis fait sur l'espace vert dans notre objet de type Review
+                    $review = new Review($author_name, $rating, $relative_time_description, $text);
+
+                    //on stock les infos de l'activité dans notre objet de type Activities
+                    $activities = new Activities($nomEspacesVerts, $addressLocation, $urlPhoto, $addresse, $idEspacesVerts, $urlMap, $review);
+                    
                 }
                 //on insère l'instance dans le tableau
-                array_push($tabActivites, $place);
+                array_push($tabActivites, $activities);
             }
             //on retourne le tableau qui sera parcouru pour l'affichage
             return $tabActivites;
@@ -176,7 +201,7 @@ require_once 'modeles/review.php';
             
         }
         //permet de générer les images 
-       public function generatePicture($pictureReference, $maxHeight = '500', $maxWidth = ''){
+       public function generatePicture($pictureReference, $maxHeight = '400', $maxWidth = ''){
         $urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$pictureReference.'&key='.$this->apiKey;
         return $urlPhoto;
        } 

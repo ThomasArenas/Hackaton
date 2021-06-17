@@ -18,7 +18,7 @@ $apiUtilities = new ApiUtilities();
         foreach($apiUtilities->getActivities() as $place){ ?>
             <div class="col-xl-6 col-lg-12 col-md-12">
                 <div class="member">
-                    <img src="<?php echo $place->urlImage; ?>"  style="height:300px">
+                    <img src="<?php echo $place->urlImage; ?>"  alt="">
                     <div class="member-info">
                         <div class="member-info-content">
                             <h4><?= $place->getNom(); ?></h4>
