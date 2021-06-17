@@ -1,31 +1,13 @@
-function getXhr(){
-	var xhr = null; 
-	if(window.XMLHttpRequest) { // Firefox et autres
-	  xhr = new XMLHttpRequest();
-	} else if(window.ActiveXObject){ // Internet Explorer 
-	  try {
-		xhr = new ActiveXObject("Msxml2.XMLHTTP");
-	  } catch (e) {
-		xhr = new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	} else { // XMLHttpRequest non supporté par le navigateur 
-	  alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest."); 
-	  xhr = false; 
-	} 
-	return xhr;
-  }
-
 function callback(position) {
 	var lat = position.coords.latitude;
 	var lng = position.coords.longitude;
-	console.log(lat, lng);
-
-	var xhr = getXhr();
-	xhr.open("POST","espaces_verts_affichage.php",true);
-	// ne pas oublier ça pour le post
-	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-	// ne pas oublier de poster les arguments
-	xhr.send("latitude=2");
+	if(document.getElementById('villes').value == "position") {
+		document.getElementById('LatLng').value = lat + "," + lng;
+	} else {
+		document.getElementById('LatLng').value = document.getElementById('villes').value;
+	}
+	console.log(document.getElementById('LatLng').value);
+	document.getElementById('changeVille').submit()
 }
 
 function erreur(error) {
@@ -42,8 +24,10 @@ function erreur(error) {
 	}
 };
 
-// On vérifie que la méthode est implémenté dans le navigateur
-if (navigator.geolocation) {
-	// On demande d'envoyer la position courante à la fonction callback
-	navigator.geolocation.getCurrentPosition(callback, erreur);
+function getPosition() {
+	// On vérifie que la méthode est implémenté dans le navigateur
+	if (navigator.geolocation) {
+		// On demande d'envoyer la position courante à la fonction callback
+		navigator.geolocation.getCurrentPosition(callback, erreur);
+	}
 }
