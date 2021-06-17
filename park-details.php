@@ -96,7 +96,8 @@ include "header.php";
                 <li><strong>Afficher sur la carte</strong>: <a href="<?= $place->getUrl(); ?>" target='_blank'>GoogleMap</a></li>
               </ul>
             </div>
-            <div class="portfolio-description">
+            
+            <div class="portfolio-description" >
               <p sytle="font-size: 14px"> " <?= $place->getReview()->getText(); ?> "</p> 
               <p><span style="font-weight : bold; font-style : italic; color : #64605F;"> <?= $place->getReview()->getAuthor_name(); ?></span> (<?= $place->getReview()->getRelative_time_description(); ?>)</p>
             </div>

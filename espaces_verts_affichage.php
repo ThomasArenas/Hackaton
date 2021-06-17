@@ -30,7 +30,7 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
             <option id="li" value="50.6365654,3.0635282">Lille</option>
           </select>
         </h2>
-        <p>Découvrez vos espaces vert à travers les meilleures activités à proximité.</p>
+        <p>Découvrez vos espaces verts à travers les meilleures activités à proximité.</p>
       </div>
 
       <script>
@@ -70,13 +70,13 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
           <div class="portfolio-wrap">
-            <img src="<?php echo $place->urlImage; ?>" class="" alt="" style="max-width: 420px">
+            <img src="<?php echo $place->urlImage; ?>" class="" alt="" style="max-height: 350px">
             <div class="portfolio-info">
               <h4><?= $place->getNom(); ?></h4>
               <p><?= $place->getFormatedAddress(); ?></p>
               <div class="portfolio-links">
                 <a onclick="document.getElementById('formPlace<?= $place->getIdPlace(); ?>').submit()" title="Plus d'informations"><i class="bx bx-plus"></i></a>
-                <a href="<?= $place->getUrlMap(); ?>" title="Voir sur Google Map"><i class="bx bx-link"></i></a>
+                <a href="<?= $place->getUrlMap(); ?>" title="Voir sur Google Map"><i class="bi bi-geo-alt-fill"></i></a>
               </div>
             </div>
           </div>

@@ -191,7 +191,7 @@ require_once 'modeles/activities.php';
                    
                     switch($numPhoto) {
                         case  1 :
-                            $refPicture1 = '';
+                            $refPicture1 = 'assets/img/visuel-indisponible-650.png';
                             break;
                         case 2 :
                             $refPicture2 = '';
@@ -244,8 +244,8 @@ require_once 'modeles/activities.php';
         }
         //permet de générer les images 
        public function generatePicture($pictureReference, $maxHeight = '400', $maxWidth = ''){
-           if($pictureReference==''){
-               $urlPhoto = '';
+           if($pictureReference=='' || $pictureReference=='assets/img/visuel-indisponible-650.png'){
+               $urlPhoto = $pictureReference;
            } else{
             $urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$pictureReference.'&key='.$this->apiKey;
            }

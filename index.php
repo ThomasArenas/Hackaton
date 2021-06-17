@@ -18,34 +18,18 @@
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown">Découvrez votre ville et ses magnifiques espaces verts</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <div>
-                  <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
+                <p class="animate__animated animate__fadeInUp">Pour favoriser la découverte des espaces verts proches de chez vous et vous permettre d’en profiter pleinement, notre équipe a voulu créer une application pour les habitants des grandes métropoles qui regroupe toutes les activités disponibles dans ces espaces verts et leurs alentours.</p>
               </div>
             </div>
           </div>
 
           <!-- Slide 2 -->
-          <div class="carousel-item" style="background: url(assets/img/slide/slide-2.jpg);">
-            <div class="carousel-container">
-            
-                  <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
           <div class="carousel-item" style="background: url(assets/img/slide/slide-3.jpg);">
-            <div class="carousel-background"><img src="assets/img/slide/slide-3.jpg" alt=""></div>
             <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <div>
-                  <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
+            <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">Découvrez votre ville et ses magnifiques espaces verts</h2>
+                <p class="animate__animated animate__fadeInUp">Pour favoriser la découverte des espaces verts proches de chez vous et vous permettre d’en profiter pleinement, notre équipe a voulu créer une application pour les habitants des grandes métropoles qui regroupe toutes les activités disponibles dans ces espaces verts et leurs alentours.</p>
+              </div>
               </div>
             </div>
           </div>
