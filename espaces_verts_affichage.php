@@ -81,7 +81,7 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
               <p><?= $place->getFormatedAddress(); ?></p>
               <div class="portfolio-links">
                 <a onclick="document.getElementById('formPlace<?= $place->getIdPlace(); ?>').submit()" title="Plus d'informations"><i class="bx bx-plus"></i></a>
-                <a href="<?= $place->getUrlMap(); ?>" title="Voir sur Google Map"><i class="bi bi-geo-alt-fill"></i></a>
+                <a href="<?= $place->getUrlMap(); ?>" target="_blank" title="Voir sur Google Map"><i class="bi bi-geo-alt-fill"></i></a>
               </div>
             </div>
           </div>

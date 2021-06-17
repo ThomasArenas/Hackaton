@@ -3,6 +3,7 @@ require_once 'modeles/place.php';
 require_once 'modeles/singlePlace.php';
 require_once 'modeles/review.php';
 require_once 'modeles/activities.php';
+require_once 'trunkString.php';
 
 
     class ApiUtilities {
@@ -127,7 +128,9 @@ require_once 'modeles/activities.php';
                         $relative_time_description = "Information non disponible";
                     }
                     else{
-                        $text = $responseReview->result->reviews[0]->text;
+                        //fonction qui permet de tronquer la taille des avis souvent trop conséquents
+                        $text = trunkString($responseReview->result->reviews[0]->text, 300);
+                         
                         $rating = $responseReview->result->reviews[0]->rating;
                         $author_name = $responseReview->result->reviews[0]->author_name;
                         $relative_time_description = $responseReview->result->reviews[0]->relative_time_description;

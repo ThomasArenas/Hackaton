@@ -1,12 +1,13 @@
 
 <?php 
 require_once 'modeles/apiUtilities.php';
+
 //instance de la classe Activite pour utiliser la fonction de récupération des activités
 $apiUtilities = new ApiUtilities();
 ?>
 <!-- ======= Team Section ======= -->
 <section id="team" class="team">
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="section-title">
             <h2>Activités à proximités</h2>
@@ -16,9 +17,9 @@ $apiUtilities = new ApiUtilities();
 
         <?php //Pour chaque activité présente, on génère son affichage
         foreach($apiUtilities->getActivities() as $place){ ?>
-            <div class="col-xl-6 col-lg-12 col-md-12">
-                <div class="member">
-                    <img src="<?php echo $place->urlImage; ?>"  style="height:300px">
+            <div class="">
+                <div class="member ">
+                    <img src="<?php echo $place->urlImage; ?>"  class="img-fluid " >
                     <div class="member-info">
                         <div class="member-info-content">
                             <h4><?= $place->getNom(); ?></h4>

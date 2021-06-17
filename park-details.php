@@ -94,15 +94,16 @@ include "header.php";
                 <?php } ?>
                 
                 <li><strong>Afficher sur la carte</strong>: <a href="<?= $place->getUrl(); ?>" target='_blank'>GoogleMap</a></li>
-              </ul>
-            </div>
+              
             
-            <div class="portfolio-description" >
-              <p sytle="font-size: 14px"> " <?= $place->getReview()->getText(); ?> "</p> 
-              <p><span style="font-weight : bold; font-style : italic; color : #64605F;"> <?= $place->getReview()->getAuthor_name(); ?></span> (<?= $place->getReview()->getRelative_time_description(); ?>)</p>
-            </div>
+            
+            <li> <strong>Avis d'un visiteur</strong>: 
+              <p style="font-size: 14px; font-style : italic"> " <?= $place->getReview()->getText(); ?> " 
+              <span style="font-size: 12px; font-weight : bold; font-style : italic; color : #64605F;">   </br> <i class="bi bi-chat-text"></i> <?= $place->getReview()->getAuthor_name(); ?></span>  <span style="font-size:12px"> (<?= $place->getReview()->getRelative_time_description(); ?>)</span></p>
+              </li> 
+            </ul>
           </div>
-
+          </div>
         </div>
 
       </div>

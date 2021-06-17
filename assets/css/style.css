@@ -8,6 +8,19 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 1200px) { 
+  .sizeImage{
+    height:300px;
+  }
+ 
+}
+
+
+
+
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
