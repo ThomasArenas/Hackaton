@@ -20,7 +20,7 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
             <input type='hidden' name="LatLng" id="LatLng">
         </form>
         <h2>Sélectionner une localisation : 
-          <select id="villes" onchange="document.getElementById('LatLng').value = value;document.getElementById('changeVille').submit()">
+          <select id="villes" onchange="getPosition();">
             <option id="ly" value="45.7578137,4.8320114">Lyon</option>
             <option id="pa" value="48.8566969,2.3514616">Paris</option>
             <option id="ma" value="43.2961743,5.3699525">Marseille</option>
@@ -28,6 +28,7 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
             <option id="bo" value="44.841225,-0.5800364">Bordeaux</option>
             <option id="st" value="48.584614,7.7507127">Strasbourg</option>
             <option id="li" value="50.6365654,3.0635282">Lille</option>
+            <option id="pos" value="position">Votre position</option>
           </select>
         </h2>
         <p>Découvrez vos espaces verts à travers les meilleures activités à proximité.</p>
@@ -57,6 +58,10 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
           case "50.6365654,3.0635282" :
             document.getElementById('li').setAttribute("selected", "");
             break;
+          default :
+            document.getElementById('pos').setAttribute("selected", "");
+            break;
+
         }
       </script>
 
