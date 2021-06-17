@@ -174,16 +174,50 @@ require_once 'modeles/activities.php';
             $nomEspaceVert = $response->result->name;
             $urlMap = $response->result->url;
             $addresse = $response->result->formatted_address;
-            
-            $refPicture1 =$response->result->photos[0]->photo_reference;
-            $refPicture2 =$response->result->photos[1]->photo_reference;
-            $refPicture3 =$response->result->photos[2]->photo_reference;
 
-            //on récupère les horraires de l'espace vert dans un tableau
-            $timetable = array();
-            for ($i=0; $i < 7; $i++) { 
-                array_push($timetable, $response->result->opening_hours->weekday_text[$i]);
+            //on récupère les photos (si il y en a)
+            for ($i=0; $i < 3; $i++) { 
+                $numPhoto = $i +1;
+               
+                if(isset($response->result->photos[$i])==false){
+                   
+                    switch($numPhoto) {
+                        case  1 :
+                            $refPicture1 = '';
+                            break;
+                        case 2 :
+                            $refPicture2 = '';
+                            break;
+                        case 3 :
+                            $refPicture3 = '';
+                            break;
+                    }
+                }
+                else{
+                    switch($numPhoto) {
+                        case  1 :
+                            $refPicture1 =$response->result->photos[0]->photo_reference;
+                            break;
+                        case 2 :
+                            $refPicture2 =$response->result->photos[1]->photo_reference;
+                            break;
+                        case 3 :
+                            $refPicture3 =$response->result->photos[2]->photo_reference;
+                            break;
+                    }
+                }
             }
+           
+            //on récupère les horraires de l'espace vert dans un tableau (si il y en a)
+            $timetable = array();
+            if(isset($response->result->opening_hours->weekday_text[$i])){
+                for ($i=0; $i < 7; $i++) { 
+                    array_push($timetable, $response->result->opening_hours->weekday_text[$i]);
+                }
+            } else{
+                array_push($timetable,"Non disponibles");
+            }
+            
             
             //on récupère le premier avis sur l'espace vert
             $text = $response->result->reviews[0]->text;
@@ -202,7 +236,12 @@ require_once 'modeles/activities.php';
         }
         //permet de générer les images 
        public function generatePicture($pictureReference, $maxHeight = '400', $maxWidth = ''){
-        $urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$pictureReference.'&key='.$this->apiKey;
+           if($pictureReference==''){
+               $urlPhoto = '';
+           } else{
+            $urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$pictureReference.'&key='.$this->apiKey;
+           }
+        
         return $urlPhoto;
        } 
 }
