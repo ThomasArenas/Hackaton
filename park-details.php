@@ -32,18 +32,24 @@ include "header.php";
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper-container">
               <div class="swiper-wrapper align-items-center">
-
+                <?php if($place->getPicture1() !== ""){ ?>
                 <div class="swiper-slide">
-                  <img src="<?= $place->getPicture1(); ?>" alt="">
+                  <img src="<?= $place->getPicture1(); ?>" style="width:auto; height:500px">
                 </div>
+                <?php } ?>
 
+                <?php if($place->getPicture2()!== ""){ ?>
                 <div class="swiper-slide">
-                  <img src="<?= $place->getPicture2(); ?>" alt="">
+                  <img src="<?= $place->getPicture2(); ?>" style="width:auto; height:500px">
                 </div>
+                <?php } ?>
 
+              
+                <?php if($place->getPicture3()!== ""){ ?>
                 <div class="swiper-slide">
-                  <img src="<?= $place->getPicture3(); ?>" alt="">
+                  <img src="<?= $place->getPicture3(); ?>" style="width:auto; height:500px">
                 </div>
+                <?php } ?>
 
               </div>
               <div class="swiper-pagination"></div>
@@ -55,7 +61,7 @@ include "header.php";
               <h3><?= $place->getNom(); ?></h3>
               <ul>
                 <li><strong>Adresse</strong>: <?= $place->getFormatted_address(); ?> </li>
-                <li><strong>Horraires</strong>:</li>
+                <li><strong>Horaires</strong>:</li>
                 <?php 
                 //Tableau correspondances jours Anglais Francais
                   $jourAnglais = array('Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday');
@@ -91,7 +97,7 @@ include "header.php";
               </ul>
             </div>
             <div class="portfolio-description">
-              <h5> " <?= $place->getReview()->getText(); ?> "</h5> 
+              <p sytle="font-size: 14px"> " <?= $place->getReview()->getText(); ?> "</p> 
               <p><span style="font-weight : bold; font-style : italic; color : #64605F;"> <?= $place->getReview()->getAuthor_name(); ?></span> (<?= $place->getReview()->getRelative_time_description(); ?>)</p>
             </div>
           </div>
@@ -105,7 +111,7 @@ include "header.php";
 
   <?php 
   //Affichage des activités
-    include "activite_affichage.php" ?>
+    include "activite_affichage.php"; ?>
 
 <?php 
     //Affichage des espaces verts

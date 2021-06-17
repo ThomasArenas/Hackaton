@@ -1,30 +1,44 @@
+
 <?php 
 require_once 'modeles/apiUtilities.php';
 //instance de la classe Activite pour utiliser la fonction de récupération des activités
 $apiUtilities = new ApiUtilities();
 ?>
-
-<!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio">
+<!-- ======= Team Section ======= -->
+<section id="team" class="team">
     <div class="container">
 
-      <div class="row portfolio-container">
+        <div class="section-title">
+            <h2>Activités à proximités</h2>
+        </div>
+
+        <div class="row">
+
         <?php //Pour chaque activité présente, on génère son affichage
         foreach($apiUtilities->getActivities() as $place){ ?>
-          <div class="col-lg-3 col-md-6 portfolio-item filter-app">
-            <img src="<?php echo $place->urlImage; ?>" class="" alt="" style="max-width:16vw;">
-          </div>
-          <div class="col-lg-9 col-md-6 portfolio-item filter-app">
-            <h4><?= $place->getNom(); ?></h4>
-            <p><?= $place->getFormatedAddress(); ?></p>
-            <?php if($place->getUrlMap() != '') { ?>
-              <div class="portfolio-links">
-                <a href="<?= $place->getUrlMap(); ?>" title="Voir sur Google Map <?= $place->getUrlMap(); ?>"><i class="bx bx-link"></i></a>
-              </div>
-              <?php } ?>
-          </div>
-        <?php } ?>
-      </div>
+            <div class="col-xl-6 col-lg-12 col-md-12">
+                <div class="member">
+                    <img src="<?php echo $place->urlImage; ?>"  style="height:300px">
+                    <div class="member-info">
+                        <div class="member-info-content">
+                            <h4><?= $place->getNom(); ?></h4>
+                            <span style="font-size : 12px">"
+                                <?php if(is_null($place->getReview()->getText())){
+                                        echo "Pas de commentaire.";
+                                        }  else {
+                                        echo $place->getReview()->getText();  
+                                        }
+                                ?> "</span>
+                            <div class="social">
+                            <span><a href="<?= $place->getUrlMap(); ?>" target="_blank" title="Voir sur Google Map <?= $place->getUrlMap(); ?>"><?= $place->getFormatedAddress(); ?></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php } ?>
+        </div>
 
     </div>
-</section><!-- End Portfolio Section -->
+  </section><!-- End Team Section -->
