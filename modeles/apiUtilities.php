@@ -22,17 +22,24 @@ require_once 'modeles/review.php';
             for ($i=0; $i <sizeof($response->results) && ($i< $this->resultCount) ; $i++) { 
                 //on récupère le noms, reference_photo et id de l'espace en cours 
                 $nomEspacesVerts = $response->results[$i]->name;
-                $referencePhotoEspacesVerts = $response->results[$i]->photos[0]->photo_reference;
+
+                if(!isset($response->results[$i]->photos)) {
+                    $urlPhoto = 'assets/img/park.png';
+                } else {
+                    $referencePhotoEspacesVerts = $response->results[$i]->photos[0]->photo_reference;
+                    //on crée l'url qui servira à afficher la photo de l'espace en cours
+                    $urlPhoto = $this->baseURL.'place/photo?maxwidth=500&maxheight=500&photoreference='.$referencePhotoEspacesVerts.'&key='.$this->apiKey;
+                }
+                
                 $idEspacesVerts = $response->results[$i]->place_id;
-                //on crée l'url qui servira à afficher la photo de l'espace en cours
-                //$urlPhoto = $this->baseURL.'place/photo?maxwidth='.$maxWidth.'&maxheight='.$maxHeight.'&photoreference='.$referencePhotoEspacesVerts.'&key='.$this->apiKey;
+                
                 //on crée l'url qui servira à afficher l'addresse formatée de l'espace en cours
                 $urlAddresse = $this->baseURL.'place/details/json?place_id='.$idEspacesVerts.'&fields=formatted_address,url,geometry&key='.$this->apiKey;
                 $addresse = $this->getPlacesAddresse($urlAddresse);
                 $urlMap = $this->getUrlMap($urlAddresse);
                 $addressLocation = $this->getLocation($urlAddresse);
                 //on stock les noms et référence_photo des espaces verts dans notre objet de type place
-                $place = new Place($nomEspacesVerts, $location, $this->generatePicture($referencePhotoEspacesVerts),$addresse, $idEspacesVerts, $urlMap);
+                $place = new Place($nomEspacesVerts, $location, $urlPhoto, $addresse, $idEspacesVerts, $urlMap);
                 //on insère l'instance dans le tableau
                 array_push($tabEspacesVerts, $place);
             }

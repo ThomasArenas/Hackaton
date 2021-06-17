@@ -6,7 +6,7 @@ $apiUtilities = new ApiUtilities();
 if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
   $LatLng = $_POST["LatLng"];
 } else {
-  $LatLng = "45.773754217023,4.8520206932541";
+  $LatLng = "45.7578137,4.8320114";
 }
 ?>
 
@@ -21,17 +21,44 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
         </form>
         <h2>Sélectionner une localisation : 
           <select id="villes" onchange="document.getElementById('LatLng').value = value;document.getElementById('changeVille').submit()">
-            <option value="45.7578137,4.8320114">Lyon</option>
-            <option value="48.8566969,2.3514616">Paris</option>
-            <option value="43.2961743,5.3699525">Marseille</option>
-            <option value="43.6112422,3.8767337">Montpellier</option>
-            <option value="44.841225,-0.5800364">Bordeaux</option>
-            <option value="48.584614,7.7507127">Strasbourg</option>
-            <option value="50.6365654,3.0635282">Lille</option>
+            <option id="ly" value="45.7578137,4.8320114">Lyon</option>
+            <option id="pa" value="48.8566969,2.3514616">Paris</option>
+            <option id="ma" value="43.2961743,5.3699525">Marseille</option>
+            <option id="mo" value="43.6112422,3.8767337">Montpellier</option>
+            <option id="bo" value="44.841225,-0.5800364">Bordeaux</option>
+            <option id="st" value="48.584614,7.7507127">Strasbourg</option>
+            <option id="li" value="50.6365654,3.0635282">Lille</option>
           </select>
         </h2>
         <p>Découvrez vos espaces vert à travers les meilleures activités à proximité.</p>
       </div>
+
+      <script>
+        var ville = "<?= strval($LatLng) ?>";
+        switch (ville) {
+          case "45.7578137,4.8320114" :
+            document.getElementById('ly').setAttribute("selected", "");
+            break;
+          case "48.8566969,2.3514616" :
+            document.getElementById('pa').setAttribute("selected", "");
+            break;
+          case "43.2961743,5.3699525" :
+            document.getElementById('ma').setAttribute("selected", "");
+            break;
+          case "43.6112422,3.8767337" :
+            document.getElementById('mo').setAttribute("selected", "");
+            break;
+          case "44.841225,-0.5800364" :
+            document.getElementById('bo').setAttribute("selected", "");
+            break;
+          case "48.584614,7.7507127" :
+            document.getElementById('st').setAttribute("selected", "");
+            break;
+          case "50.6365654,3.0635282" :
+            document.getElementById('li').setAttribute("selected", "");
+            break;
+        }
+      </script>
 
       <div class="row portfolio-container">
         <?php //Pour chaque espace vert présent, on génère son affichage
@@ -43,7 +70,7 @@ if(!empty( $_POST["LatLng"]) && isset( $_POST["LatLng"])) {
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-app">
           <div class="portfolio-wrap">
-            <img src="<?php echo $place->urlImage; ?>" class="" alt="">
+            <img src="<?php echo $place->urlImage; ?>" class="" alt="" style="max-width: 420px">
             <div class="portfolio-info">
               <h4><?= $place->getNom(); ?></h4>
               <p><?= $place->getFormatedAddress(); ?></p>
