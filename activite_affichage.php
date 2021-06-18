@@ -17,7 +17,7 @@ $apiUtilities = new ApiUtilities();
 
         <?php //Pour chaque activité présente, on génère son affichage
         foreach($apiUtilities->getActivities() as $place){ ?>
-            <div class="">
+            <div class="col-xl-7 align-items-center mx-auto " >
                 <div class="member ">
                     <img src="<?php echo $place->urlImage; ?>"  class="img-fluid " >
                     <div class="member-info">
